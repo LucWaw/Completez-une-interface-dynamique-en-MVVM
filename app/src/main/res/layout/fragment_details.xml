@@ -47,6 +47,7 @@
             tools:text="Restaurant Indien" />
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -89,6 +90,7 @@
             android:id="@+id/AverageRatingCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
             android:fontFamily="@font/jakarta_semibold"
             android:textColor="#666"
             android:textSize="24sp"
@@ -102,6 +104,7 @@
             android:id="@+id/AverageRatingStar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5.41dp"
             android:isIndicator="true"
             android:numStars="5"
             app:layout_constraintStart_toStartOf="@+id/tvRestaurantName"
@@ -114,6 +117,7 @@
             android:id="@+id/RatingNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="13.5dp"
             android:fontFamily="@font/jakarta_semibold"
             android:textColor="#666"
             android:textSize="12sp"
@@ -125,13 +129,78 @@
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_horizontal5"
+            android:layout_width="235dp"
+            android:layout_height="3dp"
             app:indicatorColor="#FFB800"
+            app:layout_constraintEnd_toEndOf="@+id/chipGroup"
+            app:layout_constraintTop_toTopOf="@+id/AverageRatingCount"
             app:trackColor="#DADADA"
-            android:layout_width="211dp"
+            app:trackCornerRadius="2dp"
+            tools:progress="100" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal4"
+            android:layout_width="235dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
+            app:layout_constraintStart_toStartOf="@+id/progress_horizontal5"
+            app:layout_constraintTop_toBottomOf="@+id/progress_horizontal5"
+            app:trackColor="#DADADA"
+            app:trackCornerRadius="2dp"
+            tools:progress="80" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal3"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
+            app:trackCornerRadius="2dp"
+            app:trackColor="#DADADA"
+            android:layout_width="235dp"
+            android:layout_height="3dp"
+            app:layout_constraintStart_toStartOf="@+id/progress_horizontal4"
+            app:layout_constraintTop_toBottomOf="@+id/progress_horizontal4"
+            tools:progress="60"/>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal2"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
+            app:trackCornerRadius="2dp"
+            app:trackColor="#DADADA"
+            android:layout_width="235dp"
+            android:layout_height="3dp"
+            app:layout_constraintStart_toStartOf="@+id/progress_horizontal3"
+            app:layout_constraintTop_toBottomOf="@+id/progress_horizontal3"
+            tools:progress="20"/>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal1"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
+            app:trackCornerRadius="2dp"
+            app:trackColor="#DADADA"
+            android:layout_width="235dp"
+            android:layout_height="3dp"
+            app:layout_constraintStart_toStartOf="@+id/progress_horizontal2"
+            app:layout_constraintTop_toBottomOf="@+id/progress_horizontal2"
+            tools:progress="30"/>
+
+        <TextView
+            android:id="@+id/RatingTextButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/AverageRatingStar"
-            app:layout_constraintTop_toBottomOf="@+id/tvRestaurantName"
-            tools:progress="50"/>
+            android:layout_marginTop="13dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/jakarta_semibold"
+            android:minHeight="48.dp"
+            android:text="@string/leave_a_review"
+            android:textColor="#666"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/progress_horizontal1"
+
+            app:layout_constraintTop_toBottomOf="@+id/progress_horizontal1" />
 
         <View
             android:id="@+id/separator"
