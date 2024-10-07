@@ -86,6 +86,24 @@ public class DetailsViewModel extends ViewModel {
     }
 
     /**
+     * Return the number of gived notation divided by number of notation.
+     *
+     * @return the average of that element
+     */
+    public double notationAverage(int notation){
+        if (reviewIsEmpty()){
+            return 0;
+        }
+        int numberOfNotation = 0;
+        for (Review reviews : Objects.requireNonNull(reviews.getValue())){
+            if (reviews.getRate() == notation){
+                numberOfNotation +=1;
+            }
+        }
+        return (double) numberOfNotation / numberOfReview();
+    }
+
+    /**
      * Checks if the reviews are either null or empty.
      * If the reviews are not initialized, it calls `setUpReviews()` to fetch them.
      *

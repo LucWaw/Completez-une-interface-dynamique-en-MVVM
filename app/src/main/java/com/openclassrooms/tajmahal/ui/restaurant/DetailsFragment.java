@@ -71,10 +71,24 @@ public class DetailsFragment extends Fragment {
         detailsViewModel.getReviews().observe(requireActivity(),this::updateUIWithReviews);
     }
 
+    /**
+     * Updates the UI components with the provided reviews data.
+     *
+     * @param reviews The list of reviews object containing details to be displayed.
+     */
     @SuppressLint("SetTextI18n")//parentheses uniquely, no need translation
     private void updateUIWithReviews(List<Review> reviews) {
         binding.averageRatingCount.setText( String.format(Locale.FRANCE, "%.1f", detailsViewModel.averageReview()));
         binding.ratingNumber.setText("("+String.format(Locale.getDefault(), "%d", detailsViewModel.numberOfReview())+")");
+        binding.averageRatingStar.setRating((float) detailsViewModel.averageReview());
+        binding.progressHorizontal1.setProgress((int) (detailsViewModel.notationAverage(1)*100));
+        binding.progressHorizontal2.setProgress((int) (detailsViewModel.notationAverage(2)*100));
+        binding.progressHorizontal3.setProgress((int) (detailsViewModel.notationAverage(3)*100));
+        binding.progressHorizontal4.setProgress((int) (detailsViewModel.notationAverage(4)*100));
+        binding.progressHorizontal5.setProgress((int) (detailsViewModel.notationAverage(5)*100));
+
+
+
     }
 
     /**
