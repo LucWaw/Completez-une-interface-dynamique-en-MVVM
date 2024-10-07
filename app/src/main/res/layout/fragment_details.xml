@@ -85,18 +85,65 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <TextView
+            android:id="@+id/AverageRatingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jakarta_semibold"
+            android:textColor="#666"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/AverageRatingStar"
+            app:layout_constraintStart_toStartOf="@+id/AverageRatingStar"
+            app:layout_constraintTop_toBottomOf="@+id/tvRestaurantName"
+            tools:text="4.0" />
+
+
+        <RatingBar
+            android:id="@+id/AverageRatingStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            app:layout_constraintStart_toStartOf="@+id/tvRestaurantName"
+            app:layout_constraintTop_toBottomOf="@+id/AverageRatingCount"
+            android:theme="@style/RatingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            tools:rating="4" />
+
+        <TextView
+            android:id="@+id/RatingNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jakarta_semibold"
+            android:textColor="#666"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/AverageRatingStar"
+            app:layout_constraintStart_toStartOf="@+id/AverageRatingStar"
+            app:layout_constraintTop_toBottomOf="@+id/AverageRatingStar"
+            tools:text="(257)" />
+
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal5"
+            app:indicatorColor="#FFB800"
+            app:trackColor="#DADADA"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/AverageRatingStar"
+            app:layout_constraintTop_toBottomOf="@+id/tvRestaurantName"
+            tools:progress="50"/>
+
         <View
             android:id="@+id/separator"
             android:layout_width="0dp"
             android:layout_height="0.75dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-
-            android:background="#DADADA"
+            android:background="#D9D9D9"
             app:layout_constraintBottom_toTopOf="@+id/tvRestaurantHours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRestaurantName" />
+            app:layout_constraintTop_toBottomOf="@id/RatingNumber" />
 
         <ImageView
             android:id="@+id/icon_hours"
