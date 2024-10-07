@@ -24,6 +24,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="leave_a_review">Leave a review</string>
+    <string name="arrow_back">arrow back</string>
+    <string name="image_of_the_user">Image of the user</string>
 
 
 </resources>

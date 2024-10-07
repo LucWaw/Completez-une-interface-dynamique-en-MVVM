@@ -23,6 +23,8 @@
     <string name="phone_icon">Phone icon</string>
     <string name="hello_blank_fragment">Bonjour fragment blanc</string>
     <string name="leave_a_review">Laisser un avis</string>
+    <string name="arrow_back">Flèche retour</string>
+    <string name="image_of_the_user">Image de l\'utilisateur</string>
 
 
 </resources>
