@@ -87,43 +87,43 @@
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
-            android:id="@+id/AverageRatingCount"
+            android:id="@+id/averageRatingCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             android:fontFamily="@font/jakarta_semibold"
             android:textColor="#666"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="@+id/AverageRatingStar"
-            app:layout_constraintStart_toStartOf="@+id/AverageRatingStar"
+            app:layout_constraintEnd_toEndOf="@+id/averageRatingStar"
+            app:layout_constraintStart_toStartOf="@+id/averageRatingStar"
             app:layout_constraintTop_toBottomOf="@+id/tvRestaurantName"
             tools:text="4.0" />
 
 
         <RatingBar
-            android:id="@+id/AverageRatingStar"
+            android:id="@+id/averageRatingStar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5.41dp"
             android:isIndicator="true"
             android:numStars="5"
             app:layout_constraintStart_toStartOf="@+id/tvRestaurantName"
-            app:layout_constraintTop_toBottomOf="@+id/AverageRatingCount"
+            app:layout_constraintTop_toBottomOf="@+id/averageRatingCount"
             android:theme="@style/RatingBar"
             style="?android:attr/ratingBarStyleSmall"
             tools:rating="4" />
 
         <TextView
-            android:id="@+id/RatingNumber"
+            android:id="@+id/ratingNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13.5dp"
             android:fontFamily="@font/jakarta_semibold"
             android:textColor="#666"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/AverageRatingStar"
-            app:layout_constraintStart_toStartOf="@+id/AverageRatingStar"
-            app:layout_constraintTop_toBottomOf="@+id/AverageRatingStar"
+            app:layout_constraintEnd_toEndOf="@+id/averageRatingStar"
+            app:layout_constraintStart_toStartOf="@+id/averageRatingStar"
+            app:layout_constraintTop_toBottomOf="@+id/averageRatingStar"
             tools:text="(257)" />
 
 
@@ -133,7 +133,7 @@
             android:layout_height="3dp"
             app:indicatorColor="#FFB800"
             app:layout_constraintEnd_toEndOf="@+id/chipGroup"
-            app:layout_constraintTop_toTopOf="@+id/AverageRatingCount"
+            app:layout_constraintTop_toTopOf="@+id/averageRatingCount"
             app:trackColor="#DADADA"
             app:trackCornerRadius="2dp"
             tools:progress="100" />
@@ -212,7 +212,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tvRestaurantHours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/RatingNumber" />
+            app:layout_constraintTop_toBottomOf="@id/ratingNumber" />
 
         <ImageView
             android:id="@+id/icon_hours"

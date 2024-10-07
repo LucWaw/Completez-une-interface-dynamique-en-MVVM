@@ -8,10 +8,14 @@ import androidx.lifecycle.ViewModel;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.Review;
+
 
 import javax.inject.Inject;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
@@ -26,6 +30,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class DetailsViewModel extends ViewModel {
 
     private final RestaurantRepository restaurantRepository;
+
+    LiveData<List<Review>> reviews;
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
@@ -45,6 +51,77 @@ public class DetailsViewModel extends ViewModel {
     public LiveData<Restaurant> getTajMahalRestaurant() {
         return restaurantRepository.getRestaurant();
     }
+
+    /**
+     * Initializes the `reviews` LiveData by fetching reviews from the restaurant repository.
+     */
+    private void setUpReviews(){
+        reviews = restaurantRepository.getReviews();
+    }
+
+    /**
+     * Returns the LiveData object that contains the list of reviews.
+     * If the reviews have not been initialized, it calls `setUpReviews()` to fetch them.
+     *
+     * @return LiveData containing a list of Review objects, or null if not yet initialized.
+     */
+    public LiveData<List<Review>> getReviews(){
+        if (reviews == null){
+            setUpReviews();
+        }
+        return reviews;
+    }
+
+    /**
+     * Returns the number of reviews available.
+     * If there are no reviews or the reviews have not been fetched yet, it returns 0.
+     *
+     * @return the number of reviews, or 0 if none are available.
+     */
+    public int numberOfReview(){
+        if (reviewIsEmpty()){
+            return 0;
+        }
+        return Objects.requireNonNull(reviews.getValue()).size();
+    }
+
+    /**
+     * Checks if the reviews are either null or empty.
+     * If the reviews are not initialized, it calls `setUpReviews()` to fetch them.
+     *
+     * @return true if the reviews are null or empty, false otherwise.
+     */
+    private Boolean reviewIsEmpty(){
+        if (reviews == null){
+            setUpReviews();
+        }
+        return reviews.getValue() == null || reviews.getValue().isEmpty();
+    }
+
+    /**
+     * Calculates and returns the average rating of all reviews.
+     * If there are no reviews, it returns 0.
+     *
+     * @return the average rating as a double, or 0 if there are no reviews.
+     */
+    public double averageReview() {
+        if (reviewIsEmpty()) {
+            return 0;
+        }
+
+        List<Review> reviewList = reviews.getValue();
+
+        //pour ide, on a deja testé le null dans reviewIsEmpty
+        assert reviewList != null;
+
+        return reviewList.stream()
+                .mapToInt(Review::getRate)
+                .average()
+                .orElse(0);
+    }
+
+
+
 
     /**
      * Retrieves the current day of the week in French.
