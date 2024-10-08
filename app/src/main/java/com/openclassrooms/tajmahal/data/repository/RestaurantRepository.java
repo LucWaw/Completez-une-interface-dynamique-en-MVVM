@@ -7,7 +7,7 @@ import com.openclassrooms.tajmahal.data.service.RestaurantApi;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
-import java.util.List;
+import java.util.Deque;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -64,7 +64,7 @@ public class RestaurantRepository {
      *
      * @return LiveData list holding the reviews details.
      */
-    public LiveData<List<Review>> getReviews(){
+    public LiveData<Deque<Review>> getReviews(){
         return new MutableLiveData<>(restaurantApi.getReviews());
     }
 

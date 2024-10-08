@@ -26,7 +26,7 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 import androidx.fragment.app.FragmentManager;
 
 
-import java.util.List;
+import java.util.Deque;
 import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -81,7 +81,7 @@ public class DetailsFragment extends Fragment {
      * @param reviews The list of reviews object containing details to be displayed.
      */
     @SuppressLint("SetTextI18n")//parentheses uniquely, no need translation
-    private void updateUIWithReviews(List<Review> reviews) {
+    private void updateUIWithReviews(Deque<Review> reviews) {
         binding.averageRatingCount.setText( String.format(Locale.FRANCE, "%.1f", detailsViewModel.averageReview()));
         binding.ratingNumber.setText("("+String.format(Locale.getDefault(), "%d", detailsViewModel.numberOfReview())+")");
         binding.averageRatingStar.setRating((float) detailsViewModel.averageReview());

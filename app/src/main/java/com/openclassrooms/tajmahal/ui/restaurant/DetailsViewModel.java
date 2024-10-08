@@ -14,7 +14,7 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 import javax.inject.Inject;
 
 import java.util.Calendar;
-import java.util.List;
+import java.util.Deque;
 import java.util.Objects;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -31,7 +31,7 @@ public class DetailsViewModel extends ViewModel {
 
     private final RestaurantRepository restaurantRepository;
 
-    LiveData<List<Review>> reviews;
+    LiveData<Deque<Review>> reviews;
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
@@ -65,7 +65,7 @@ public class DetailsViewModel extends ViewModel {
      *
      * @return LiveData containing a list of Review objects, or null if not yet initialized.
      */
-    public LiveData<List<Review>> getReviews(){
+    public LiveData<Deque<Review>> getReviews(){
         if (reviews == null){
             setUpReviews();
         }
@@ -127,7 +127,7 @@ public class DetailsViewModel extends ViewModel {
             return 0;
         }
 
-        List<Review> reviewList = reviews.getValue();
+        Deque<Review> reviewList = reviews.getValue();
 
         //pour ide, on a deja testé le null dans reviewIsEmpty
         assert reviewList != null;

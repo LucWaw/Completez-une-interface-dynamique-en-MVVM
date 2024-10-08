@@ -1,11 +1,12 @@
 package com.openclassrooms.tajmahal.data.service;
 
-import androidx.lifecycle.LiveData;
+
 
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
-import java.util.List;
+import java.util.Deque;
+
 
 /**
  * Interface for fetching restaurant data.
@@ -49,5 +50,5 @@ public interface RestaurantApi {
      *
      * @return The {@link Restaurant} object containing all the details of the restaurant.
      */
-    List<Review> getReviews();
+    Deque<Review> getReviews();
 }
