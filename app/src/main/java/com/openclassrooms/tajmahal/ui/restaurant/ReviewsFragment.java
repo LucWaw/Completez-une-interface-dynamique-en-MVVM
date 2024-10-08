@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.tajmahal.databinding.FragmentReviewsBinding;
 import com.openclassrooms.tajmahal.domain.model.Review;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,8 @@ public class ReviewsFragment extends Fragment {
 
         binding.iconBack.setOnClickListener(v-> requireActivity().onBackPressed());
         setupRecyclerView();
+        Picasso.get().load("https://xsgames.co/randomusers/assets/avatars/female/14.jpg").into(binding.imageConnectedUser);
+
         detailsViewModel.getReviews().observe(getViewLifecycleOwner(), deque -> {
             // Convertir Deque en List
             List<Review> reviewList = new ArrayList<>(deque);
