@@ -31,6 +31,12 @@ import java.util.Deque;
 public interface RestaurantApi {
 
     /**
+     * Add a reviews in the list of reviews
+     * @param review the review to be added to the list
+     */
+    void addReview(Review review);
+
+    /**
      * Retrieves the details of a restaurant.
      * <p>
      * This method will usually be connected to a network call or database query in its
@@ -51,4 +57,5 @@ public interface RestaurantApi {
      * @return The {@link Restaurant} object containing all the details of the restaurant.
      */
     Deque<Review> getReviews();
+
 }

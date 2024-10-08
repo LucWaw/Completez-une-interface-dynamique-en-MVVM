@@ -44,6 +44,7 @@ public class RestaurantFakeApi implements RestaurantApi {
      * Add a reviews in the list of reviews
      * @param review the review to be added to the list
      */
+    @Override
     public void addReview(Review review){
         //add at begining
         reviews.push(review);

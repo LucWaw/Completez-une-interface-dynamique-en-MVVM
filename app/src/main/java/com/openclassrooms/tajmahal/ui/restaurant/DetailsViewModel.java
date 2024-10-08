@@ -6,7 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.tajmahal.R;
+import com.openclassrooms.tajmahal.data.exceptions.NoMessageException;
+import com.openclassrooms.tajmahal.data.exceptions.NoRatingException;
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
+import com.openclassrooms.tajmahal.data.repository.ReviewsRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
@@ -30,17 +33,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class DetailsViewModel extends ViewModel {
 
     private final RestaurantRepository restaurantRepository;
+    private final ReviewsRepository reviewsRepository;
 
     LiveData<Deque<Review>> reviews;
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
      *
+     * @param reviewsRepository The repository which will provide reviews data.
      * @param restaurantRepository The repository which will provide restaurant data.
      */
     @Inject
-    public DetailsViewModel(RestaurantRepository restaurantRepository) {
+    public DetailsViewModel(RestaurantRepository restaurantRepository, ReviewsRepository reviewsRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.reviewsRepository = reviewsRepository;
     }
 
     /**
@@ -56,7 +62,7 @@ public class DetailsViewModel extends ViewModel {
      * Initializes the `reviews` LiveData by fetching reviews from the restaurant repository.
      */
     private void setUpReviews(){
-        reviews = restaurantRepository.getReviews();
+        reviews = reviewsRepository.getReviews();
     }
 
     /**
@@ -138,7 +144,22 @@ public class DetailsViewModel extends ViewModel {
                 .orElse(0);
     }
 
-
+    /**
+     * Add a Review on the top of the list
+     *
+     * @param review the review to be added
+     * @return ReviewAddValidation the error state  (complete when all is good)
+     */
+    public ReviewAddValidation addReview(Review review) {
+        try{
+            reviewsRepository.addReview(review);
+        } catch (NoRatingException e) {
+            return ReviewAddValidation.NORATING;
+        } catch (NoMessageException e) {
+            return ReviewAddValidation.NOMESSAGE;
+        }
+        return ReviewAddValidation.COMPLETE;
+    }
 
 
     /**
