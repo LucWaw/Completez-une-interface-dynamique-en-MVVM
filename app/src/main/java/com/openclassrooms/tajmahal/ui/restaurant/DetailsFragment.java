@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -21,6 +22,9 @@ import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
+
+import androidx.fragment.app.FragmentManager;
+
 
 import java.util.List;
 import java.util.Locale;
@@ -134,7 +138,8 @@ public class DetailsFragment extends Fragment {
     private void updateUIWithRestaurant(Restaurant restaurant) {
         if (restaurant == null) return;
 
-        binding.tvRestaurantName.setText(restaurant.getName());
+        String name = restaurant.getName();
+        binding.tvRestaurantName.setText(name);
         binding.tvRestaurantDay.setText(detailsViewModel.getCurrentDay(requireContext()));
         binding.tvRestaurantType.setText(String.format("%s %s", getString(R.string.restaurant), restaurant.getType()));
         binding.tvRestaurantHours.setText(restaurant.getHours());
@@ -147,6 +152,19 @@ public class DetailsFragment extends Fragment {
         binding.buttonAdress.setOnClickListener(v -> openMap(restaurant.getAddress()));
         binding.buttonPhone.setOnClickListener(v -> dialPhoneNumber(restaurant.getPhoneNumber()));
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
+        binding.leaveAReviewButton.setOnClickListener(v -> {
+
+
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            ReviewsFragment reviewFragment = ReviewsFragment.newInstance();
+            Bundle args = new Bundle();
+            args.putString("RestaurantName", name);
+            reviewFragment.setArguments(args);
+            fragmentTransaction.replace(R.id.container, reviewFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
     }
 
     /**

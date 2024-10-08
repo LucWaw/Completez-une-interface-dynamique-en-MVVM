@@ -25,6 +25,8 @@
     <string name="leave_a_review">Laisser un avis</string>
     <string name="arrow_back">Flèche retour</string>
     <string name="image_of_the_user">Image de l\'utilisateur</string>
+    <string name="confirm">Valider</string>
+    <string name="detail_experience">Partagez ici les détails de votre \nexpérience</string>
 
 
 </resources>

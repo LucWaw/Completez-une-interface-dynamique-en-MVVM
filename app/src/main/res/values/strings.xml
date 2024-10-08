@@ -26,6 +26,8 @@
     <string name="leave_a_review">Leave a review</string>
     <string name="arrow_back">arrow back</string>
     <string name="image_of_the_user">Image of the user</string>
+    <string name="confirm">Confirm</string>
+    <string name="detail_experience">Share the details of your \nexperience here</string>
 
 
 </resources>

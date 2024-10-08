@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ImageView
+        android:id="@+id/icon_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:contentDescription="@string/arrow_back"
+        android:focusable="true"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvRestaurantName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jakarta_bold"
+        android:textSize="18sp"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_back"
+        app:layout_constraintStart_toEndOf="@+id/icon_back"
+        app:layout_constraintTop_toTopOf="@+id/icon_back"
+        tools:text="Taj Mahal" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="29dp"
+        app:cardBackgroundColor="@color/white"
+
+        app:cardCornerRadius="250dp"
+        app:layout_constraintStart_toStartOf="@+id/icon_back"
+        app:layout_constraintTop_toBottomOf="@+id/icon_back">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="250dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/image_of_the_user"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/jakarta_semibold"
+        android:textColor="#666"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toTopOf="@+id/userImage"
+        android:text="Manon Garcia"
+        tools:ignore="HardcodedText" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:scaleX="1.6"
+        android:theme="@style/RatingBar"
+        android:scaleY="1.6"
+        android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="@+id/userImage"
+        app:layout_constraintStart_toStartOf="@+id/userName" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_confirm"
+        style="@style/Widget.Material3.Chip.Suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:chipBackgroundColor="#CF2F2F"
+        app:chipCornerRadius="12dp"
+        app:chipStrokeColor="#CF2F2F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/userName"
+        app:textEndPadding="0dp"
+        app:textStartPadding="0dp" />
+
+    <EditText
+        android:id="@+id/experienceEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:autofillHints="text"
+        android:hint="@string/detail_experience"
+        android:inputType="textMultiLine"
+        android:minLines="1"
+        android:maxLines="5"
+        android:scrollHorizontally="false"
+        android:gravity="top|start"
+        android:minHeight="48dp"
+        android:textSize="12sp"
+        android:textColor="#9A9A9A"
+        android:background="@drawable/experience_edittext_border"
+        app:layout_constraintEnd_toEndOf="@+id/chip_confirm"
+        app:layout_constraintStart_toStartOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/userImage"  />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/review_item"
+        app:layout_constraintTop_toBottomOf="@id/experienceEditText"
+        app:layout_constraintStart_toStartOf="@id/experienceEditText"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

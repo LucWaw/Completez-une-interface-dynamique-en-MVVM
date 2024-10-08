@@ -19,6 +19,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/food_picture"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -187,7 +188,7 @@
             tools:progress="30"/>
 
         <TextView
-            android:id="@+id/RatingTextButton"
+            android:id="@+id/leaveAReviewButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
