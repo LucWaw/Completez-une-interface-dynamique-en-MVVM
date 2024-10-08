@@ -1,5 +1,6 @@
 package com.openclassrooms.tajmahal.ui.restaurant;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentReviewsBinding;
 import com.openclassrooms.tajmahal.domain.model.Review;
 import com.squareup.picasso.Picasso;
@@ -88,9 +91,49 @@ public class ReviewsFragment extends Fragment {
 
         binding.iconBack.setOnClickListener(v-> requireActivity().onBackPressed());
         setupRecyclerView();
-        Picasso.get().load("https://xsgames.co/randomusers/assets/avatars/female/14.jpg").into(binding.imageConnectedUser);
+        String url = "https://xsgames.co/randomusers/assets/avatars/female/14.jpg";
+        Picasso.get().load(url).into(binding.imageConnectedUser);
 
-        detailsViewModel.getReviews().observe(getViewLifecycleOwner(), deque -> {
+        observeAndUpdateReviews();
+
+        binding.chipConfirm.setOnClickListener(v->{
+            String userName = binding.userName.getText().toString();
+            String comment = binding.experienceEditText.getText().toString();
+            int rate = (int) binding.ratingBar.getRating();
+
+            Review review = new Review(userName, url, comment, rate);
+            ReviewAddValidation validation = detailsViewModel.addReview(review);
+
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence toastText = "";
+            Context context = getContext();
+            if (context==null){
+                return;
+            }
+            switch (validation){
+                case COMPLETE:
+                    toastText = context.getString(R.string.validation_complete);
+                    binding.experienceEditText.setText("");
+                    binding.ratingBar.setRating(0);
+                    break;
+                case NOMESSAGE:
+                    toastText = context.getString(R.string.validation_no_message);
+                    break;
+                case NORATING:
+                    toastText = context.getString(R.string.validation_no_rating);
+                    break;
+            }
+            Toast toast = Toast.makeText(getContext() , toastText, duration);
+            toast.show();
+
+            observeAndUpdateReviews();
+
+
+        });
+    }
+
+    private void observeAndUpdateReviews() {
+        detailsViewModel.getReviews().observe(requireActivity(), deque -> {
             // Convertir Deque en List
             List<Review> reviewList = new ArrayList<>(deque);
             updateReviewList(reviewList);
@@ -112,7 +155,6 @@ public class ReviewsFragment extends Fragment {
      * @param reviews The updated review list.
      */
     private void updateReviewList(List<Review> reviews) {
-        Log.d("Lucas", reviews.toString());
         adapter.submitList(reviews);
     }
 

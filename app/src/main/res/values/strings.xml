@@ -28,6 +28,9 @@
     <string name="image_of_the_user">Image of the user</string>
     <string name="confirm">Confirm</string>
     <string name="detail_experience">Share the details of your \nexperience here</string>
+    <string name="validation_complete">Review added!</string>
+    <string name="validation_no_message">Please add a comment!</string>
+    <string name="validation_no_rating">Please use the star icons to add a rating!</string>
 
 
 </resources>

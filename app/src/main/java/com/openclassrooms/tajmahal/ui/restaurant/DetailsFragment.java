@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,16 +83,17 @@ public class DetailsFragment extends Fragment {
      */
     @SuppressLint("SetTextI18n")//parentheses uniquely, no need translation
     private void updateUIWithReviews(Deque<Review> reviews) {
+        Log.d("Lucass", String.valueOf((int)(detailsViewModel.notationAverage(5)*100)));
         binding.averageRatingCount.setText( String.format(Locale.FRANCE, "%.1f", detailsViewModel.averageReview()));
         binding.ratingNumber.setText("("+String.format(Locale.getDefault(), "%d", detailsViewModel.numberOfReview())+")");
         binding.averageRatingStar.setRating((float) detailsViewModel.averageReview());
-        binding.progressHorizontal1.setProgress((int) (detailsViewModel.notationAverage(1)*100));
-        binding.progressHorizontal2.setProgress((int) (detailsViewModel.notationAverage(2)*100));
-        binding.progressHorizontal3.setProgress((int) (detailsViewModel.notationAverage(3)*100));
-        binding.progressHorizontal4.setProgress((int) (detailsViewModel.notationAverage(4)*100));
-        binding.progressHorizontal5.setProgress((int) (detailsViewModel.notationAverage(5)*100));
 
 
+        binding.progressHorizontal1.post(() -> binding.progressHorizontal1.setProgress((int) (detailsViewModel.notationAverage(1)*100), true));
+        binding.progressHorizontal2.post(() -> binding.progressHorizontal2.setProgress((int) (detailsViewModel.notationAverage(2)*100), true));
+        binding.progressHorizontal3.post(() -> binding.progressHorizontal3.setProgress((int) (detailsViewModel.notationAverage(3)*100), true));
+        binding.progressHorizontal4.post(() -> binding.progressHorizontal4.setProgress((int) (detailsViewModel.notationAverage(4)*100), true));
+        binding.progressHorizontal5.post(() -> binding.progressHorizontal5.setProgress((int) (detailsViewModel.notationAverage(5)*100), true));
 
     }
 

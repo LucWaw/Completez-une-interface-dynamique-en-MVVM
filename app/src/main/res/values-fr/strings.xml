@@ -27,6 +27,9 @@
     <string name="image_of_the_user">Image de l\'utilisateur</string>
     <string name="confirm">Valider</string>
     <string name="detail_experience">Partagez ici les détails de votre \nexpérience</string>
+    <string name="validation_complete">Avis ajoutée !</string>
+    <string name="validation_no_message">Veuillez ajouter un commentaire !</string>
+    <string name="validation_no_rating">Veuillez utiliser les icônes en forme d\'étoile pour ajouter une note !</string>
 
 
 </resources>
