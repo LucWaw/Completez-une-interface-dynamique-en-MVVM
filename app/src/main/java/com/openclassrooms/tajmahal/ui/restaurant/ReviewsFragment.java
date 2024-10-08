@@ -61,5 +61,6 @@ public class ReviewsFragment extends Fragment {
         }
         binding.tvRestaurantName.setText(value);
 
+        binding.iconBack.setOnClickListener(v-> requireActivity().onBackPressed());
     }
 }
