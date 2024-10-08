@@ -25,7 +25,6 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 
 import androidx.fragment.app.FragmentManager;
 
-
 import java.util.Deque;
 import java.util.Locale;
 
@@ -45,6 +44,7 @@ public class DetailsFragment extends Fragment {
     private FragmentDetailsBinding binding;
 
     private DetailsViewModel detailsViewModel;
+
 
     /**
      * This method is called when the fragment is first created.

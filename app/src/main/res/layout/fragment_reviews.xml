@@ -37,7 +37,7 @@
         tools:text="Taj Mahal" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/userImage"
+        android:id="@+id/userCardView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="29dp"
@@ -73,8 +73,8 @@
         android:fontFamily="@font/jakarta_semibold"
         android:textColor="#666"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/userImage"
-        app:layout_constraintTop_toTopOf="@+id/userImage"
+        app:layout_constraintStart_toEndOf="@+id/userCardView"
+        app:layout_constraintTop_toTopOf="@+id/userCardView"
         android:text="Manon Garcia"
         tools:ignore="HardcodedText" />
 
@@ -90,7 +90,7 @@
         android:theme="@style/RatingBar"
         android:scaleY="1.6"
         android:stepSize="1"
-        app:layout_constraintBottom_toBottomOf="@+id/userImage"
+        app:layout_constraintBottom_toBottomOf="@+id/userCardView"
         app:layout_constraintStart_toStartOf="@+id/userName" />
 
     <com.google.android.material.chip.Chip
@@ -128,8 +128,8 @@
         android:textColor="#9A9A9A"
         android:background="@drawable/experience_edittext_border"
         app:layout_constraintEnd_toEndOf="@+id/chip_confirm"
-        app:layout_constraintStart_toStartOf="@+id/userImage"
-        app:layout_constraintTop_toBottomOf="@+id/userImage"  />
+        app:layout_constraintStart_toStartOf="@+id/userCardView"
+        app:layout_constraintTop_toBottomOf="@+id/userCardView"  />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
