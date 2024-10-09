@@ -134,9 +134,10 @@ public class DetailsViewModel extends ViewModel {
 
         Deque<Review> reviewList = reviews.getValue();
 
-        //pour ide, on a deja testé le null dans reviewIsEmpty
+        //For IDE null already tested in reviewIsEmpty
         assert reviewList != null;
 
+        //Average of review
         return reviewList.stream()
                 .mapToInt(Review::getRate)
                 .average()

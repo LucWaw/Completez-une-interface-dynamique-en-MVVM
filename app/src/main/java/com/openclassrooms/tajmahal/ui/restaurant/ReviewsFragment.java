@@ -93,6 +93,7 @@ public class ReviewsFragment extends Fragment {
         Picasso.get().load(url).into(binding.imageConnectedUser);
 
         observeAndUpdateReviews();
+        updateRecyclerViewScroll();
 
         binding.chipConfirm.setOnClickListener(v -> {
             String userName = binding.userName.getText().toString();
@@ -118,7 +119,6 @@ public class ReviewsFragment extends Fragment {
                         List<Review> reviewList = new ArrayList<>(deque);
                         updateReviewList(reviewList);
                     }
-                    updateRecyclerViewScroll();
                     break;
                 case NOMESSAGE:
                     toastText = context.getString(R.string.validation_no_message);
@@ -134,6 +134,9 @@ public class ReviewsFragment extends Fragment {
         });
     }
 
+    /**
+     * Update the scroll of the recycle view to put on top when a review is added
+     */
     private void updateRecyclerViewScroll() {
         RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter1 =
                 (RecyclerView.Adapter<? extends RecyclerView.ViewHolder>)
@@ -148,6 +151,9 @@ public class ReviewsFragment extends Fragment {
         }
     }
 
+    /**
+     * Observe the reviews to update the layout when there is a change
+     */
     private void observeAndUpdateReviews() {
         detailsViewModel.getReviews().observe(requireActivity(), deque -> {
             // Convertir Deque en List

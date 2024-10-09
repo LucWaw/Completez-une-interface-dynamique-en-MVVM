@@ -62,6 +62,6 @@ public interface RestaurantApi {
      * Set Reviews at 0 element
      * Useful for testing
      */
-    public void resetReview();
+    void resetReview();
 
 }
