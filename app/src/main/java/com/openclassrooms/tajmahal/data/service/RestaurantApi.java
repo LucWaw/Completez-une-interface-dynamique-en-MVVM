@@ -58,4 +58,10 @@ public interface RestaurantApi {
      */
     Deque<Review> getReviews();
 
+    /**
+     * Set Reviews at 0 element
+     * Useful for testing
+     */
+    public void resetReview();
+
 }

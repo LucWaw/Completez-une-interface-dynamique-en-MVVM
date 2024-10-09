@@ -41,6 +41,14 @@ public class RestaurantFakeApi implements RestaurantApi {
     final Deque<Review> reviews = new ArrayDeque<>(list);
 
     /**
+     * Set Reviews at 0 for test
+     */
+    public void resetReview(){
+        reviews.clear();
+    }
+
+
+    /**
      * Add a reviews in the list of reviews
      *
      * @param review the review to be added to the list
