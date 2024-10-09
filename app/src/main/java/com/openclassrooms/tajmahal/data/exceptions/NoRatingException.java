@@ -1,5 +1,5 @@
 package com.openclassrooms.tajmahal.data.exceptions;
 
-public class NoRatingException extends Exception{
+public class NoRatingException extends Exception {
 
 }

@@ -13,12 +13,11 @@ import com.openclassrooms.tajmahal.data.repository.ReviewsRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
-
-import javax.inject.Inject;
-
 import java.util.Calendar;
 import java.util.Deque;
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
@@ -26,7 +25,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
  * MainViewModel is responsible for preparing and managing the data for the {@link DetailsFragment}.
  * It communicates with the {@link RestaurantRepository} to fetch restaurant details and provides
  * utility methods related to the restaurant UI.
- *
+ * <p>
  * This ViewModel is integrated with Hilt for dependency injection.
  */
 @HiltViewModel
@@ -40,7 +39,7 @@ public class DetailsViewModel extends ViewModel {
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
      *
-     * @param reviewsRepository The repository which will provide reviews data.
+     * @param reviewsRepository    The repository which will provide reviews data.
      * @param restaurantRepository The repository which will provide restaurant data.
      */
     @Inject
@@ -61,7 +60,7 @@ public class DetailsViewModel extends ViewModel {
     /**
      * Initializes the `reviews` LiveData by fetching reviews from the restaurant repository.
      */
-    private void setUpReviews(){
+    private void setUpReviews() {
         reviews = reviewsRepository.getReviews();
     }
 
@@ -71,8 +70,8 @@ public class DetailsViewModel extends ViewModel {
      *
      * @return LiveData containing a list of Review objects, or null if not yet initialized.
      */
-    public LiveData<Deque<Review>> getReviews(){
-        if (reviews == null){
+    public LiveData<Deque<Review>> getReviews() {
+        if (reviews == null) {
             setUpReviews();
         }
         return reviews;
@@ -84,8 +83,8 @@ public class DetailsViewModel extends ViewModel {
      *
      * @return the number of reviews, or 0 if none are available.
      */
-    public int numberOfReview(){
-        if (reviewIsEmpty()){
+    public int numberOfReview() {
+        if (reviewIsEmpty()) {
             return 0;
         }
         return Objects.requireNonNull(reviews.getValue()).size();
@@ -96,14 +95,14 @@ public class DetailsViewModel extends ViewModel {
      *
      * @return the average of that element
      */
-    public double notationAverage(int notation){
-        if (reviewIsEmpty()){
+    public double notationAverage(int notation) {
+        if (reviewIsEmpty()) {
             return 0;
         }
         int numberOfNotation = 0;
-        for (Review reviews : Objects.requireNonNull(reviews.getValue())){
-            if (reviews.getRate() == notation){
-                numberOfNotation +=1;
+        for (Review reviews : Objects.requireNonNull(reviews.getValue())) {
+            if (reviews.getRate() == notation) {
+                numberOfNotation += 1;
             }
         }
         return (double) numberOfNotation / numberOfReview();
@@ -115,8 +114,8 @@ public class DetailsViewModel extends ViewModel {
      *
      * @return true if the reviews are null or empty, false otherwise.
      */
-    private Boolean reviewIsEmpty(){
-        if (reviews == null){
+    private Boolean reviewIsEmpty() {
+        if (reviews == null) {
             setUpReviews();
         }
         return reviews.getValue() == null || reviews.getValue().isEmpty();
@@ -151,7 +150,7 @@ public class DetailsViewModel extends ViewModel {
      * @return ReviewAddValidation the error state  (complete when all is good)
      */
     public ReviewAddValidation addReview(Review review) {
-        try{
+        try {
             reviewsRepository.addReview(review);
         } catch (NoRatingException e) {
             return ReviewAddValidation.NORATING;

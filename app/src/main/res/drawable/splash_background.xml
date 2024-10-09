@@ -6,9 +6,9 @@
     <!-- Logo au centre -->
     <item>
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/logo"
             android:width="50px"
-            android:height="50px"/>
+            android:height="50px"
+            android:gravity="center"
+            android:src="@drawable/logo" />
     </item>
 </layer-list>

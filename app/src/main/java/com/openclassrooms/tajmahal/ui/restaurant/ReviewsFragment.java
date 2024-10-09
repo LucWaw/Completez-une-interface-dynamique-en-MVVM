@@ -2,6 +2,10 @@ package com.openclassrooms.tajmahal.ui.restaurant;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,11 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentReviewsBinding;
@@ -35,27 +34,26 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class ReviewsFragment extends Fragment {
 
     private FragmentReviewsBinding binding;
+    private ReviewsRecyclerViewAdapter adapter;
+    private DetailsViewModel detailsViewModel;
 
     public static ReviewsFragment newInstance() {
         return new ReviewsFragment();
     }
 
-    private ReviewsRecyclerViewAdapter adapter;
-
-    private DetailsViewModel detailsViewModel;
-
-
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     /**
      * Creates and returns the view hierarchy associated with the fragment.
      *
-     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
-     * The fragment should not add the view itself but return it.
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     *                           The fragment should not add the view itself but return it.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     *                           from a previous saved state as given here.
      * @return Returns the View for the fragment's UI, or null.
      */
     @Override
@@ -75,9 +73,9 @@ public class ReviewsFragment extends Fragment {
      * This method is called immediately after `onCreateView()`.
      * Use this method to perform final initialization once the fragment views have been inflated.
      *
-     * @param view The View returned by `onCreateView()`.
+     * @param view               The View returned by `onCreateView()`.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     *                           from a previous saved state as given here.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -89,14 +87,14 @@ public class ReviewsFragment extends Fragment {
         }
         binding.tvRestaurantName.setText(value);
 
-        binding.iconBack.setOnClickListener(v-> requireActivity().onBackPressed());
+        binding.iconBack.setOnClickListener(v -> requireActivity().onBackPressed());
         setupRecyclerView();
         String url = "https://xsgames.co/randomusers/assets/avatars/female/14.jpg";
         Picasso.get().load(url).into(binding.imageConnectedUser);
 
         observeAndUpdateReviews();
 
-        binding.chipConfirm.setOnClickListener(v->{
+        binding.chipConfirm.setOnClickListener(v -> {
             String userName = binding.userName.getText().toString();
             String comment = binding.experienceEditText.getText().toString();
             int rate = (int) binding.ratingBar.getRating();
@@ -107,10 +105,10 @@ public class ReviewsFragment extends Fragment {
             int duration = Toast.LENGTH_SHORT;
             CharSequence toastText = "";
             Context context = getContext();
-            if (context==null){
+            if (context == null) {
                 return;
             }
-            switch (validation){
+            switch (validation) {
                 case COMPLETE:
                     toastText = context.getString(R.string.validation_complete);
                     binding.experienceEditText.setText("");
@@ -129,11 +127,8 @@ public class ReviewsFragment extends Fragment {
                     toastText = context.getString(R.string.validation_no_rating);
                     break;
             }
-            Toast toast = Toast.makeText(getContext() , toastText, duration);
+            Toast toast = Toast.makeText(getContext(), toastText, duration);
             toast.show();
-
-
-
 
 
         });
@@ -199,6 +194,7 @@ public class ReviewsFragment extends Fragment {
 
     /**
      * Updates the list of reviews displayed in the adapter.
+     *
      * @param reviews The updated review list.
      */
     private void updateReviewList(List<Review> reviews) {

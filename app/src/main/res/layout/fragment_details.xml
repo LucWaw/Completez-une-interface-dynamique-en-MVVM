@@ -103,15 +103,15 @@
 
         <RatingBar
             android:id="@+id/averageRatingStar"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5.41dp"
             android:isIndicator="true"
             android:numStars="5"
+            android:theme="@style/RatingBar"
             app:layout_constraintStart_toStartOf="@+id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@+id/averageRatingCount"
-            android:theme="@style/RatingBar"
-            style="?android:attr/ratingBarStyleSmall"
             tools:rating="4" />
 
         <TextView
@@ -153,39 +153,39 @@
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_horizontal3"
-            android:layout_marginTop="10dp"
-            app:indicatorColor="#FFB800"
-            app:trackCornerRadius="2dp"
-            app:trackColor="#DADADA"
             android:layout_width="235dp"
             android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
             app:layout_constraintStart_toStartOf="@+id/progress_horizontal4"
             app:layout_constraintTop_toBottomOf="@+id/progress_horizontal4"
-            tools:progress="60"/>
+            app:trackColor="#DADADA"
+            app:trackCornerRadius="2dp"
+            tools:progress="60" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_horizontal2"
-            android:layout_marginTop="10dp"
-            app:indicatorColor="#FFB800"
-            app:trackCornerRadius="2dp"
-            app:trackColor="#DADADA"
             android:layout_width="235dp"
             android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
             app:layout_constraintStart_toStartOf="@+id/progress_horizontal3"
             app:layout_constraintTop_toBottomOf="@+id/progress_horizontal3"
-            tools:progress="20"/>
+            app:trackColor="#DADADA"
+            app:trackCornerRadius="2dp"
+            tools:progress="20" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_horizontal1"
-            android:layout_marginTop="10dp"
-            app:indicatorColor="#FFB800"
-            app:trackCornerRadius="2dp"
-            app:trackColor="#DADADA"
             android:layout_width="235dp"
             android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            app:indicatorColor="#FFB800"
             app:layout_constraintStart_toStartOf="@+id/progress_horizontal2"
             app:layout_constraintTop_toBottomOf="@+id/progress_horizontal2"
-            tools:progress="30"/>
+            app:trackColor="#DADADA"
+            app:trackCornerRadius="2dp"
+            tools:progress="30" />
 
         <TextView
             android:id="@+id/leaveAReviewButton"
