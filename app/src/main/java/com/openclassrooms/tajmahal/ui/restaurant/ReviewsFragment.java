@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -115,6 +115,12 @@ public class ReviewsFragment extends Fragment {
                     toastText = context.getString(R.string.validation_complete);
                     binding.experienceEditText.setText("");
                     binding.ratingBar.setRating(0);
+                    Deque<Review> deque = detailsViewModel.getReviews().getValue();
+                    if (deque != null) {
+                        List<Review> reviewList = new ArrayList<>(deque);
+                        updateReviewList(reviewList);
+                    }
+                    updateRecyclerViewScroll();
                     break;
                 case NOMESSAGE:
                     toastText = context.getString(R.string.validation_no_message);
@@ -126,10 +132,50 @@ public class ReviewsFragment extends Fragment {
             Toast toast = Toast.makeText(getContext() , toastText, duration);
             toast.show();
 
-            observeAndUpdateReviews();
+
+
 
 
         });
+    }
+
+    private void updateRecyclerViewScroll() {
+        RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter1 =
+                (RecyclerView.Adapter<? extends RecyclerView.ViewHolder>)
+                        binding.recyclerView.getAdapter();
+        if (adapter1 != null) {
+            adapter1.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onChanged() {
+                    binding.recyclerView.scrollToPosition(0);
+                }
+
+                @Override
+                public void onItemRangeRemoved(int positionStart, int itemCount) {
+                    binding.recyclerView.scrollToPosition(0);
+                }
+
+                @Override
+                public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+                    binding.recyclerView.scrollToPosition(0);
+                }
+
+                @Override
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    binding.recyclerView.scrollToPosition(0);
+                }
+
+                @Override
+                public void onItemRangeChanged(int positionStart, int itemCount) {
+                    binding.recyclerView.scrollToPosition(0);
+                }
+
+                @Override
+                public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+                    binding.recyclerView.scrollToPosition(0);
+                }
+            });
+        }
     }
 
     private void observeAndUpdateReviews() {
@@ -145,7 +191,8 @@ public class ReviewsFragment extends Fragment {
      */
     private void setupRecyclerView() {
         RecyclerView recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new ReviewsRecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
     }
