@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +80,6 @@ public class DetailsFragment extends Fragment {
      */
     @SuppressLint("SetTextI18n")//parentheses uniquely, no need translation
     private void updateUIWithReviews() {
-        Log.d("Lucass", String.valueOf((int) (detailsViewModel.notationAverage(5) * 100)));
         binding.averageRatingCount.setText(String.format(Locale.FRANCE, "%.1f", detailsViewModel.averageReview()));
         binding.ratingNumber.setText("(" + String.format(Locale.getDefault(), "%d", detailsViewModel.numberOfReview()) + ")");
         binding.averageRatingStar.setRating((float) detailsViewModel.averageReview());

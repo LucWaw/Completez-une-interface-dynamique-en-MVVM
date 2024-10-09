@@ -47,7 +47,8 @@ public class ReviewsRepository {
      * @throws NoMessageException if there is no message in the Review
      * @throws NoRatingException  if there is no rating in the Review
      */
-    public void addReview(Review review) throws NoRatingException, NoMessageException {
+    public void addReview(Review review)
+            throws NoRatingException, NoMessageException {
         if (review.getRate() == 0) {
             throw new NoRatingException();
         }
