@@ -141,32 +141,7 @@ public class ReviewsFragment extends Fragment {
         if (adapter1 != null) {
             adapter1.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                 @Override
-                public void onChanged() {
-                    binding.recyclerView.scrollToPosition(0);
-                }
-
-                @Override
-                public void onItemRangeRemoved(int positionStart, int itemCount) {
-                    binding.recyclerView.scrollToPosition(0);
-                }
-
-                @Override
-                public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-                    binding.recyclerView.scrollToPosition(0);
-                }
-
-                @Override
                 public void onItemRangeInserted(int positionStart, int itemCount) {
-                    binding.recyclerView.scrollToPosition(0);
-                }
-
-                @Override
-                public void onItemRangeChanged(int positionStart, int itemCount) {
-                    binding.recyclerView.scrollToPosition(0);
-                }
-
-                @Override
-                public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
                     binding.recyclerView.scrollToPosition(0);
                 }
             });
