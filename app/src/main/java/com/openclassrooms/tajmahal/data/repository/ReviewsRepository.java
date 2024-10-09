@@ -29,14 +29,14 @@ public class ReviewsRepository {
 
     /**
      * Fetches the reviews
-     *
+     * <p>
      * This method will make a network call using the provided {@link RestaurantApi} instance
      * to fetch restaurant reviews. Note that error handling and any transformations on the data
      * would need to be managed.
      *
      * @return LiveData list holding the reviews details.
      */
-    public LiveData<Deque<Review>> getReviews(){
+    public LiveData<Deque<Review>> getReviews() {
         return new MutableLiveData<>(restaurantApi.getReviews());
     }
 
@@ -45,13 +45,13 @@ public class ReviewsRepository {
      *
      * @param review the review to be added
      * @throws NoMessageException if there is no message in the Review
-     * @throws NoRatingException if there is no rating in the Review
+     * @throws NoRatingException  if there is no rating in the Review
      */
-    public void addReview(Review review)throws NoRatingException, NoMessageException{
-        if (review.getRate()==0){
+    public void addReview(Review review) throws NoRatingException, NoMessageException {
+        if (review.getRate() == 0) {
             throw new NoRatingException();
         }
-        if (review.getComment().isEmpty()){
+        if (review.getComment().isEmpty()) {
             throw new NoMessageException();
         }
         restaurantApi.addReview(review);

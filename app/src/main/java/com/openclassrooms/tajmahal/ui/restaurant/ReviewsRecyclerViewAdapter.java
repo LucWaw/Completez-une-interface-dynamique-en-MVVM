@@ -30,7 +30,7 @@ public class ReviewsRecyclerViewAdapter extends ListAdapter<Review, ReviewsRecyc
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ReviewItemBinding binding;
+        final ReviewItemBinding binding;
 
         /**
          * Constructeur du ViewHolder.
@@ -54,6 +54,7 @@ public class ReviewsRecyclerViewAdapter extends ListAdapter<Review, ReviewsRecyc
         }
 
     }
+
     /**
      * Callback pour la comparaison des éléments de la liste.
      */

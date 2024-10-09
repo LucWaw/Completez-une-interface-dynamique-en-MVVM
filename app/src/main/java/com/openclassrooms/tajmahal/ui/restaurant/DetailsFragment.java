@@ -5,13 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +12,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
-import com.openclassrooms.tajmahal.domain.model.Review;
 
-import androidx.fragment.app.FragmentManager;
-
-import java.util.Deque;
 import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -46,13 +42,16 @@ public class DetailsFragment extends Fragment {
 
     private DetailsViewModel detailsViewModel;
 
+    public static DetailsFragment newInstance() {
+        return new DetailsFragment();
+    }
 
     /**
      * This method is called when the fragment is first created.
      * It's used to perform one-time initialization.
      *
      * @param savedInstanceState A bundle containing previously saved instance state.
-     * If the fragment is being re-created from a previous saved state, this is the state.
+     *                           If the fragment is being re-created from a previous saved state, this is the state.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,9 +62,9 @@ public class DetailsFragment extends Fragment {
      * This method is called immediately after `onCreateView()`.
      * Use this method to perform final initialization once the fragment views have been inflated.
      *
-     * @param view The View returned by `onCreateView()`.
+     * @param view               The View returned by `onCreateView()`.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     *                           from a previous saved state as given here.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,38 +72,37 @@ public class DetailsFragment extends Fragment {
         setupUI(); // Sets up user interface components.
         setupViewModel(); // Prepares the ViewModel for the fragment.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant); // Observes changes in the restaurant data and updates the UI accordingly.
-        detailsViewModel.getReviews().observe(requireActivity(),this::updateUIWithReviews);
+        detailsViewModel.getReviews().observe(requireActivity(), reviews -> updateUIWithReviews());
     }
 
     /**
      * Updates the UI components with the provided reviews data.
      *
-     * @param reviews The list of reviews object containing details to be displayed.
      */
     @SuppressLint("SetTextI18n")//parentheses uniquely, no need translation
-    private void updateUIWithReviews(Deque<Review> reviews) {
-        Log.d("Lucass", String.valueOf((int)(detailsViewModel.notationAverage(5)*100)));
-        binding.averageRatingCount.setText( String.format(Locale.FRANCE, "%.1f", detailsViewModel.averageReview()));
-        binding.ratingNumber.setText("("+String.format(Locale.getDefault(), "%d", detailsViewModel.numberOfReview())+")");
+    private void updateUIWithReviews() {
+        Log.d("Lucass", String.valueOf((int) (detailsViewModel.notationAverage(5) * 100)));
+        binding.averageRatingCount.setText(String.format(Locale.FRANCE, "%.1f", detailsViewModel.averageReview()));
+        binding.ratingNumber.setText("(" + String.format(Locale.getDefault(), "%d", detailsViewModel.numberOfReview()) + ")");
         binding.averageRatingStar.setRating((float) detailsViewModel.averageReview());
 
 
-        binding.progressHorizontal1.post(() -> binding.progressHorizontal1.setProgress((int) (detailsViewModel.notationAverage(1)*100), true));
-        binding.progressHorizontal2.post(() -> binding.progressHorizontal2.setProgress((int) (detailsViewModel.notationAverage(2)*100), true));
-        binding.progressHorizontal3.post(() -> binding.progressHorizontal3.setProgress((int) (detailsViewModel.notationAverage(3)*100), true));
-        binding.progressHorizontal4.post(() -> binding.progressHorizontal4.setProgress((int) (detailsViewModel.notationAverage(4)*100), true));
-        binding.progressHorizontal5.post(() -> binding.progressHorizontal5.setProgress((int) (detailsViewModel.notationAverage(5)*100), true));
+        binding.progressHorizontal1.post(() -> binding.progressHorizontal1.setProgress((int) (detailsViewModel.notationAverage(1) * 100), true));
+        binding.progressHorizontal2.post(() -> binding.progressHorizontal2.setProgress((int) (detailsViewModel.notationAverage(2) * 100), true));
+        binding.progressHorizontal3.post(() -> binding.progressHorizontal3.setProgress((int) (detailsViewModel.notationAverage(3) * 100), true));
+        binding.progressHorizontal4.post(() -> binding.progressHorizontal4.setProgress((int) (detailsViewModel.notationAverage(4) * 100), true));
+        binding.progressHorizontal5.post(() -> binding.progressHorizontal5.setProgress((int) (detailsViewModel.notationAverage(5) * 100), true));
 
     }
 
     /**
      * Creates and returns the view hierarchy associated with the fragment.
      *
-     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
-     * The fragment should not add the view itself but return it.
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     *                           The fragment should not add the view itself but return it.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     *                           from a previous saved state as given here.
      * @return Returns the View for the fragment's UI, or null.
      */
     @Override
@@ -112,7 +110,6 @@ public class DetailsFragment extends Fragment {
         binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
         return binding.getRoot(); // Returns the root view.
     }
-
 
     /**
      * Sets up the UI-specific properties, such as system UI flags and status bar color.
@@ -215,10 +212,6 @@ public class DetailsFragment extends Fragment {
         } else {
             Toast.makeText(requireActivity(), R.string.no_browser_found, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public static DetailsFragment newInstance() {
-        return new DetailsFragment();
     }
 
 }

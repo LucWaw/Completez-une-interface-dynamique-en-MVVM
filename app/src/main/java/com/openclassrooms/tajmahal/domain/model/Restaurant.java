@@ -16,7 +16,7 @@ import java.util.Objects;
  * Example:
  * <pre>
  * Restaurant tajMahal = new Restaurant("Taj Mahal", "Indian", "11h30 - 22h00",
- *                                      "123 Street", "http://tajmahal.com", "1234567890", true, false);
+ *                                      "123 Street", "<a href="http://tajmahal.com">...</a>", "1234567890", true, false);
  * </pre>
  */
 public class Restaurant {
