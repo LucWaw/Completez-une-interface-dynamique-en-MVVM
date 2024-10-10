@@ -100,8 +100,8 @@ public class ReviewsFragment extends Fragment {
             String comment = binding.experienceEditText.getText().toString();
             int rate = (int) binding.ratingBar.getRating();
 
-            Review review = new Review(userName, url, comment, rate);
-            ReviewAddValidation validation = detailsViewModel.addReview(review);
+
+            ReviewAddValidation validation = detailsViewModel.addReview(userName, url, comment, rate);
 
             int duration = Toast.LENGTH_SHORT;
             CharSequence toastText = "";

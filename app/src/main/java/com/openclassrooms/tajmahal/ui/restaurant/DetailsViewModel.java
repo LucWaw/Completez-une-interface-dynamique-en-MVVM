@@ -147,12 +147,15 @@ public class DetailsViewModel extends ViewModel {
     /**
      * Add a Review on the top of the list
      *
-     * @param review the review to be added
+     * @param userName The name of the user submitting the review.
+     * @param picture  The URL of the picture associated with the review.
+     * @param comment  The user's comment or feedback.
+     * @param rate     The rating given by the user, typically between 1 and 5.
      * @return ReviewAddValidation the error state  (complete when all is good)
      */
-    public ReviewAddValidation addReview(Review review) {
+    public ReviewAddValidation addReview(String userName, String picture, String comment, int rate) {
         try {
-            reviewsRepository.addReview(review);
+            reviewsRepository.addReview(userName, picture, comment, rate);
         } catch (NoRatingException e) {
             return ReviewAddValidation.NORATING;
         } catch (NoMessageException e) {

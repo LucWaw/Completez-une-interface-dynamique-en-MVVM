@@ -13,10 +13,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
+
 import java.util.Deque;
-import java.util.List;
+
 
 @ExtendWith(MockitoExtension.class)
 class ReviewsRepositoryTest {
@@ -36,92 +35,110 @@ class ReviewsRepositoryTest {
     @Test
     void Complete_Add_Does_Not_Throw() {
         //Arrange
-        Review review = new Review("Michel", "FakeUrl", "fdf", 5);
-
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 5;
 
         // Act & Assert
-        assertDoesNotThrow(() -> repository.addReview(review));
+        assertDoesNotThrow(() -> repository.addReview(userName, picture, comment, rate));
 
     }
 
     @Test
     void No_Message_Add_Throw() {
         //Arrange
-        Review review = new Review("Michel", "FakeUrl", "", 5);
-
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "";
+        int rate = 5;
 
         // Act & Assert
-        assertThrows(NoMessageException.class, () -> repository.addReview(review));
+        assertThrows(NoMessageException.class, () -> repository.addReview(userName, picture, comment, rate));
     }
 
     @Test
     void No_Review_Add_Throw() {
         //Arrange
-        Review review = new Review("Michel", "FakeUrl", "fdf", 0);
-
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 0;
 
         // Act & Assert
-        assertThrows(NoRatingException.class, () -> repository.addReview(review));
+        assertThrows(NoRatingException.class, () -> repository.addReview(userName, picture, comment, rate));
     }
 
     @Test
     void Add_Review_Complete_Add_To_Review() throws NoRatingException, NoMessageException {
         //Arrange
-        Review review = new Review("Michel", "FakeUrl", "fdf", 5);
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 5;
         restaurantApi.resetReview();
 
         // Act
-        repository.addReview(review);
-        Deque<Review> value = repository.getReviews().getValue();
+        repository.addReview(userName, picture, comment, rate);
+        Deque<Review> reviews = repository.getReviews().getValue();
 
         //Assert
-        if (value == null) {
+        if (reviews == null) {
             fail("Unable to get reviews");
         }
-        assertEquals(1, value.size());
-        assertEquals(review, value.getFirst());
+        assertEquals(1, reviews.size());
+        assertEquals(userName, reviews.getFirst().getUsername());
+        assertEquals(comment, reviews.getFirst().getComment());
+        assertEquals(picture, reviews.getFirst().getPicture());
+        assertEquals(rate, reviews.getFirst().getRate());
     }
 
     @Test
     void Add_Review_Without_Message_Does_Not_Add_To_Reviews() {
         // Arrange
-        Review reviewWithoutMessage = new Review("Michel", "FakeUrl", "", 5);  // Empty comment
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 0;
         restaurantApi.resetReview();
 
         // Act
         try {
-            repository.addReview(reviewWithoutMessage);  // Add review with no message
+            repository.addReview(userName, picture, comment, rate);  // Add review with no message
         } catch (NoRatingException | NoMessageException ignored) {
 
         }
-        Deque<Review> value = repository.getReviews().getValue();
+        Deque<Review> reviews = repository.getReviews().getValue();
 
         // Assert
-        if (value == null) {
+        if (reviews == null) {
             fail("Unable to get reviews");
         }
-        assertEquals(0, value.size(), "Review without a message should not be added");
+        assertEquals(0, reviews.size(), "Review without a message should not be added");
     }
 
     @Test
     void Add_Review_Without_Rating_Does_Not_Add_To_Reviews() {
         // Arrange
-        Review reviewWithoutMessage = new Review("Michel", "FakeUrl", "Nul !", 0);  // Empty comment
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 0;
         restaurantApi.resetReview();
 
         // Act
         try {
-            repository.addReview(reviewWithoutMessage);  // Add review with no message
+            repository.addReview(userName, picture, comment, rate);  // Add review with no message
         } catch (NoRatingException | NoMessageException ignored) {
 
         }
-        Deque<Review> value = repository.getReviews().getValue();
+        Deque<Review> reviews = repository.getReviews().getValue();
 
         // Assert
-        if (value == null) {
+        if (reviews == null) {
             fail("Unable to get reviews");
         }
-        assertEquals(0, value.size(), "Review without a message should not be added");
+        assertEquals(0, reviews.size(), "Review without a message should not be added");
     }
 
 

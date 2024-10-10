@@ -2,7 +2,6 @@ package com.openclassrooms.tajmahal.ui.restaurant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.data.repository.ReviewsRepository;
@@ -35,11 +34,15 @@ class DetailsViewModelTest {
 
     @Test
     void Add_Review() {
-        //Arrange
-        Review validReview = new Review("Excellent product", "FakeURL", "Super !", 5);
+        // Arrange
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 5;
 
-        //Act
-        ReviewAddValidation result = detailsViewModel.addReview(validReview);
+        // Act
+        ReviewAddValidation result = detailsViewModel.addReview(userName, picture, comment, rate);
+
 
         //Assert
         assertEquals(ReviewAddValidation.COMPLETE, result);
@@ -48,10 +51,13 @@ class DetailsViewModelTest {
     @Test
     void Add_Review_No_Message() {
         //Arrange
-        Review validReview = new Review("Excellent product", "FakeURL", "", 5);
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "";
+        int rate = 5;
 
         //Act
-        ReviewAddValidation result = detailsViewModel.addReview(validReview);
+        ReviewAddValidation result = detailsViewModel.addReview(userName, picture, comment, rate);
 
         //Assert
         assertEquals(ReviewAddValidation.NOMESSAGE, result);
@@ -60,10 +66,13 @@ class DetailsViewModelTest {
     @Test
     void Add_Review_No_Rating() {
         //Arrange
-        Review validReview = new Review("Excellent product", "FakeURL", "Super !", 0);
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 0;
 
         //Act
-        ReviewAddValidation result = detailsViewModel.addReview(validReview);
+        ReviewAddValidation result = detailsViewModel.addReview(userName, picture, comment, rate);
 
         //Assert
         assertEquals(ReviewAddValidation.NORATING, result);
@@ -72,28 +81,38 @@ class DetailsViewModelTest {
     @Test
     void Add_Review_Valid_Review_Returns_Complete() {
         // Arrange
-        Review validReview = new Review("Excellent product", "FakeURL", "Super !", 5);
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 5;
         restaurantApi.resetReview();
 
         // Act
-        ReviewAddValidation result = detailsViewModel.addReview(validReview);
+        detailsViewModel.addReview(userName, picture, comment, rate);
         Deque<Review> reviews = detailsViewModel.getReviews().getValue();
 
 
         // Assert
         assertNotNull(reviews);
         assertEquals(1, reviews.size());
-        assertEquals(validReview, reviews.getFirst());
+        assertEquals(userName, reviews.getFirst().getUsername());
+        assertEquals(comment, reviews.getFirst().getComment());
+        assertEquals(picture, reviews.getFirst().getPicture());
+        assertEquals(rate, reviews.getFirst().getRate());
+
     }
 
     @Test
     void Add_Review_No_Message_Returns_No_Message() {
         // Arrange
-        Review reviewWithoutMessage = new Review("Excellent product", "FakeURL", "", 5);
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "";
+        int rate = 5;
         restaurantApi.resetReview();
 
         // Act
-        ReviewAddValidation result = detailsViewModel.addReview(reviewWithoutMessage);
+        detailsViewModel.addReview(userName, picture, comment, rate);
         Deque<Review> reviews = detailsViewModel.getReviews().getValue();
 
 
@@ -105,11 +124,14 @@ class DetailsViewModelTest {
     @Test
     void Add_Review_NoRating_Returns_No_Rating() {
         // Arrange
-        Review reviewWithoutRating = new Review("Excellent product", "FakeURL", "Super !", 0);
+        String userName = "Excellent product";
+        String picture = "FakeURL";
+        String comment = "Super !";
+        int rate = 0;
         restaurantApi.resetReview();
 
         // Act
-        ReviewAddValidation result = detailsViewModel.addReview(reviewWithoutRating);
+        detailsViewModel.addReview(userName, picture, comment, rate);
         Deque<Review> reviews = detailsViewModel.getReviews().getValue();
 
 

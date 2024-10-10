@@ -43,18 +43,22 @@ public class ReviewsRepository {
     /**
      * Add a Review
      *
-     * @param review the review to be added
+     * @param userName The name of the user submitting the review.
+     * @param picture  The URL of the picture associated with the review.
+     * @param comment  The user's comment or feedback.
+     * @param rate     The rating given by the user, typically between 1 and 5.
      * @throws NoMessageException if there is no message in the Review
      * @throws NoRatingException  if there is no rating in the Review
      */
-    public void addReview(Review review)
+    public void addReview(String userName, String picture, String comment, int rate)
             throws NoRatingException, NoMessageException {
-        if (review.getRate() == 0) {
+        if (rate == 0) {
             throw new NoRatingException();
         }
-        if (review.getComment().isEmpty()) {
+        if (comment.isEmpty()) {
             throw new NoMessageException();
         }
+        Review review = new Review(userName, picture, comment, rate);
         restaurantApi.addReview(review);
     }
 
