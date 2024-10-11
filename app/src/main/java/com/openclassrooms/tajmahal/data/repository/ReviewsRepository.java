@@ -11,7 +11,9 @@ import com.openclassrooms.tajmahal.domain.model.Review;
 import java.util.Deque;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class ReviewsRepository {
 
     // The API interface instance that will be used for network requests related to restaurant data.
